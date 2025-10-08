@@ -2,7 +2,9 @@ import express from 'express';
 import connectDB from './src/config/db.js';
 import morgan from 'morgan';
 import ProductRoutes from './src/routes/Product.routes.js'
+import dotenv from 'dotenv';
 
+dotenv.config();
 // base de datos
 connectDB()
 

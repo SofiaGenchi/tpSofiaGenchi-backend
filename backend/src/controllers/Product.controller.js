@@ -12,7 +12,7 @@ export const getProducts = async (req, res) => {
         console.error('error al obtener los productos:', error)
         return res.status(500).json({ message: "Error interno del servidor" })
     }
-}
+};
 
 //agregar productos
 export const addProduct = async (req, res) => {
@@ -27,4 +27,20 @@ export const addProduct = async (req, res) => {
         console.error('Error al guardar el producto:', error);
         return res.status(500).json({ message: 'Error interno del servidor' })
     }
+};
+
+//eliminar producto
+export const deleteProduct = async (req, res) => {
+    try {
+        console.log('ID recibido:', req.params.productId); // prueba
+        const deleteProduct = await Product.findByIdAndDelete(req.params.productId);
+
+        if(!deleteProduct) {
+            return res.status(404).json({ message: 'el producto no existe' });
+        }
+        return res.status(201).json({ message: 'Producto eliminado correctamente' });
+    }catch (error){
+        console.error('Error al eliminar el producto:', error);
+        return res.status(500).json({ message: 'Error interno del servidor' });
+    };
 };
